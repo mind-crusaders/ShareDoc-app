@@ -1,0 +1,63 @@
+h2
+  == "#{@document['name']}"
+
+dl
+  div class="row"
+    div class="col-xs-3"
+      dt Document Repository:
+    div class="col-xs-9"
+      dd class="blockquote"
+        a href="#{@document['repo_url']}" #{@document['repo_url']}
+
+div class="row"
+  div class="col-lg-9"
+    div class="row"
+      table class="table"
+        thead
+          tr
+            th File
+            th Description
+        tbody
+          - @document['configurations'].each do |config_file|
+            tr
+              td 
+                a href="/configurations/#{config_file['id']}"
+                  == "#{config_file['attributes']['filename']}"
+              td #{config_file['attributes']['description']}
+    div class="row"
+      div class="col-xs-4"
+        - if @document['policies']['add_configuration']
+          button type="button" class="btn btn-success" data-toggle="modal" data-target="#newConfigurationModal" + New Configuration File
+    div class="row" style="height:10px;"
+  div class="col-lg-3"
+    div class="panel panel-default"
+      div class="panel-heading" Viewers
+      div class="panel-body"
+        - if @document['viewers'].empty?
+          span class="small" There are no viewers yet
+        ul class="list-group"
+          li class="list-group-item clearfix"
+            = @document['owner']['username']
+          - @document['viewers'].each do |viewer|
+            li class="list-group-item clearfix"
+              '  #{viewer['username']}
+              - if @document['policies']['remove_contributor']
+                span class="pull-right"
+                  button type="button" class="btn btn-xs btn-default"
+                    span class="glyphicon glyphicon-remove"
+        - if @document['policies']['add_viewer']
+          button type="button" class="btn btn-success" data-toggle="modal" data-target="#newViewerModal" + Add Viewer
+
+include :configuration_new_partial
+include :viewer_new_partial
+
+.row
+  .text-center
+    - if @document['policies']['edit_document']
+      a href="" edit document
+    - if @document['policies']['delete_document']
+      == ' | '
+      a href="" delete document
+    - if @document['policies']['leave_document']
+      == ' | '
+      a href="" leave document

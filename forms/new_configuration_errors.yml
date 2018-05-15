@@ -1,0 +1,7 @@
+en:
+  errors:
+    filename: 'provide filename with up to 255 legal characters'
+    filename_valid?: 'filename has illegal characters (e.g., & | \\ / <tab>'
+    doctype: 'provide doctype with up to 255 legal characters'
+    doctype_valid?: 'doctype has illegal characters (e.g., & | \\ / <tab>'
+    
