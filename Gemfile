@@ -4,28 +4,26 @@ source 'https://rubygems.org'
 ruby '2.5.1'
 
 # Web
-gem 'econfig'
 gem 'puma'
-gem 'http'
-gem 'rack-flash3'
-#gem 'sinatra'
+gem 'roda'
 gem 'slim'
 
+# Configuration
+gem 'econfig'
+gem 'rake'
+
+# Diagnostic
+gem 'pry'
+gem 'rack-test'
+
 # Security
-gem 'dry-validation'
 gem 'rack-ssl-enforcer'
 gem 'rbnacl-libsodium'
-gem 'secure_headers'
 
 # Communication
 gem 'http'
-gem 'pony'
 gem 'redis'
 gem 'redis-rack'
-
-# Diagnostic
-gem 'rake'
-gem 'tux'
 
 group :test do
   gem 'minitest'

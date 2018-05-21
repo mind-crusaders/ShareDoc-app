@@ -1,4 +1,0 @@
-en:
-  errors:
-    filename: 'filename must be filled'
-    doctype: 'URL must be in proper format'
