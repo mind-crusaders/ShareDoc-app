@@ -49,6 +49,9 @@ module Edocument
 
           flash[:notice] = 'Please login with your new account information'
           routing.redirect '/auth/login'
+
+          registration = Form::Registration.call(routing.params)
+               
         rescue StandardError => error
           puts "ERROR CREATING ACCOUNT: #{error.inspect}"
           puts error.backtrace
