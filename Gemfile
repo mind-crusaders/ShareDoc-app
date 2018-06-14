@@ -18,6 +18,7 @@ gem 'rack-test'
 
 # Security
 gem 'rack-ssl-enforcer'
+gem 'rack-ssl-enforcer'
 gem 'rbnacl-libsodium'
 
 # Communication
