@@ -17,7 +17,7 @@ gem 'pry'
 gem 'rack-test'
 
 # Security
-gem 'rack-ssl-enforcer'
+gem 'dry-validation'
 gem 'rack-ssl-enforcer'
 gem 'rbnacl-libsodium'
 
