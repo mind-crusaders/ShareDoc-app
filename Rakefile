@@ -2,7 +2,6 @@
 
 require 'rake/testtask'
 
-
 task :load_all do
   require_relative 'init.rb'
 end
