@@ -1,16 +1,25 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.4
-
-Metrics/ModuleLength:
-  Exclude:
-    - "**/*_spec.rb"
-
+  TargetRubyVersion: 2.5
+  
 Metrics/BlockLength:
+  Enabled: true
   Exclude:
-    - "Rakefile"
-    - "**/*_spec.rb"
+    - specs/**/*
+    - Rakefile
+
+Security/YAMLLoad:
+  Enabled: true
+  Exclude:
+    - specs/**/*
+
+Style/HashSyntax:
+  Enabled: true
+  Exclude:
+    - Rakefile
 
 Style/SymbolArray:
+  Enabled: true
   Exclude:
-    - "Rakefile"
+    - db/migrations/**/*
+    - Rakefile
