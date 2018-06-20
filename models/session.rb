@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Credence
+module Edocument
   # Managing session information
   class Session
     def initialize(secure_session)

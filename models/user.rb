@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Credence
+module Edocument
   # Behaviors of the currently logged in account
   class User
     def initialize(account, auth_token = nil)

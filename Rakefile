@@ -24,6 +24,11 @@ task :rubocop do
   `rubopcop **/*.rb`
 end
 
+desc 'Run application in development mode and port'
+task :run_dev do
+  sh 'rerun -c "rackup -p 9292"'
+end
+
 namespace :generate do
   desc 'Create rbnacl key'
   task :msg_key => :load_libraries do

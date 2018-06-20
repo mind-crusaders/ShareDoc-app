@@ -1,10 +1,10 @@
-require 'http'
+# frozen_string_literal: true
 
 require 'http'
 
 module Edocument
   # Returns an authenticated user, or nil
-  class AuthenticateAccount
+  class AuthenticateEmailAccount
     class UnauthorizedError < StandardError; end
 
     def initialize(config)
@@ -12,12 +12,15 @@ module Edocument
     end
 
     def call(username:, password:)
-      response = HTTP.post("#{@config.API_URL}/accounts/authenticate",
-                           json: { username: username, password: password })
+      credentials = { username: username, password: password }
+      signed_credentials = SecureMessage.sign(credentials)
 
+      response = HTTP.post("#{@config.API_URL}/auth/authenticate/email_account",
+                           json: signed_credentials)
+        puts(response.code)
       raise(UnauthorizedError) unless response.code == 200
+
       response.parse
     end
   end
 end
-

@@ -22,16 +22,16 @@ module Edocument
             routing.redirect @login_route
           end
 
-          authenticated = AuthenticateAccount.new(App.config).call(credentials)
+          authenticated = AuthenticateEmailAccount.new(App.config).call(credentials)
           current_user = User.new(authenticated['account'],
                                   authenticated['auth_token'])
 
           Session.new(SecureSession.new(session)).set_user(current_user)
           flash[:notice] = "Welcome back #{current_user.username}!"
           routing.redirect '/'
-        rescue StandardError
-          flash[:error] = 'Username and password did not match our records'
-          routing.redirect @login_route
+      #  rescue StandardError
+       #   flash[:error] = 'Username and password did not match our records'
+      #    routing.redirect @login_route
         end
       end
 
@@ -63,9 +63,9 @@ module Edocument
 
             flash[:notice] = 'Please check your email for a verification link'
             routing.redirect '/'
-          rescue StandardError
-            flash[:error] = 'Please check username and email'
-            routing.redirect @register_route
+        #  rescue StandardError
+        #    flash[:error] = 'Please check username and email'
+        #    routing.redirect @register_route
           end
         end
 
