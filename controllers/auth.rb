@@ -15,48 +15,67 @@ module Edocument
 
         # POST /auth/login
         routing.post do
-          logged_in_account = AuthenticateAccount.new(App.config).call(
-            JsonRequestBody.symbolize(routing.params)
-          )
+          credentials = Form::LoginCredentials.call(routing.params)
 
-          # session[:current_account] = account
-          SecureSession.new(session).set(:current_account, logged_in_account)
-          flash[:notice] = "Welcome back #{logged_in_account['username']}!"
+          if credentials.failure?
+            flash[:error] = 'Please enter both username and password'
+            routing.redirect @login_route
+          end
+
+          authenticated = AuthenticateEmailAccount.new(App.config).call(credentials)
+          current_user = User.new(authenticated['account'],
+                                  authenticated['auth_token'])
+
+          Session.new(SecureSession.new(session)).set_user(current_user)
+          flash[:notice] = "Welcome back #{current_user.username}!"
           routing.redirect '/'
-        rescue StandardError
-          flash[:error] = 'Username and password did not match our records'
-          routing.redirect @login_route
+      #  rescue StandardError
+       #   flash[:error] = 'Username and password did not match our records'
+      #    routing.redirect @login_route
         end
       end
 
       routing.is 'logout' do
         routing.get do
-          # session[:current_account] = nil
-          SecureSession.new(session).delete(:current_account)
+          Session.new(SecureSession.new(session)).delete
           routing.redirect @login_route
         end
       end
 
       @register_route = '/auth/register'
-      routing.is 'register' do
-        routing.get do
-          view :register
+      routing.on 'register' do
+        routing.is do
+          # GET /auth/register
+          routing.get do
+            view :register
+          end
+
+          # POST /auth/register
+          routing.post do
+            registration = Form::Registration.call(routing.params)
+
+            if registration.failure?
+              flash[:error] = Form.validation_errors(registration)
+              routing.redirect @register_route
+            end
+
+            VerifyRegistration.new(App.config).call(registration)
+
+            flash[:notice] = 'Please check your email for a verification link'
+            routing.redirect '/'
+        #  rescue StandardError
+        #    flash[:error] = 'Please check username and email'
+        #    routing.redirect @register_route
+          end
         end
 
-        routing.post do
-          account_data = JsonRequestBody.symbolize(routing.params)
-          CreateAccount.new(App.config).call(account_data)
-
-          flash[:notice] = 'Please login with your new account information'
-          routing.redirect '/auth/login'
-
-          registration = Form::Registration.call(routing.params)
-               
-        rescue StandardError => error
-          puts "ERROR CREATING ACCOUNT: #{error.inspect}"
-          puts error.backtrace
-          flash[:error] = 'Could not create account'
-          routing.redirect @register_route
+        # GET /auth/register/[registration_token]
+        routing.get(String) do |registration_token|
+          flash.now[:notice] = 'Email Verified! Please choose a new password'
+          new_account = SecureMessage.decrypt(registration_token)
+          view :register_confirm,
+               locals: { new_account: new_account,
+                         registration_token: registration_token }
         end
       end
     end

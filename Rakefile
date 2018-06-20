@@ -2,7 +2,6 @@
 
 require 'rake/testtask'
 
-
 task :load_all do
   require_relative 'init.rb'
 end
@@ -23,6 +22,11 @@ end
 desc 'Rake all the Ruby'
 task :rubocop do
   `rubopcop **/*.rb`
+end
+
+desc 'Run application in development mode and port'
+task :run_dev do
+  sh 'rerun -c "rackup -p 9292"'
 end
 
 namespace :generate do
