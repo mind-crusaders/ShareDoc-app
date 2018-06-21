@@ -5,9 +5,9 @@ require "roda"
 module Edocument
   # Web controller for Wefix API
   class App < Roda
-    route("auth") do |routing| # rubocop:disable Metrics/BlockLength
-      @login_route = "/auth/login"
-      @oauth_callback = "/auth/sso_callback"
+    route('auth') do |routing| # rubocop:disable Metrics/BlockLength
+      @login_route = '/auth/login'
+      @oauth_callback = '/auth/sso_callback'
 
       def gh_oauth_url(config)
         url = config.GH_OAUTH_URL
@@ -38,12 +38,12 @@ module Edocument
         end
       end
 
-      routing.is "login" do
+      routing.is 'login' do
         # GET /auth/login
         routing.get do
           view :login, locals: {
-                         gh_oauth_url: gh_oauth_url(App.config),
-                       }
+            gh_oauth_url: gh_oauth_url(App.config)
+          }
         end
 
         # POST /auth/login
@@ -57,6 +57,7 @@ module Edocument
 
           authenticated = AuthenticateEmailAccount.new(App.config)
                                                   .call(credentials)
+
           current_user = User.new(authenticated["account"],
                                   authenticated["auth_token"])
 

@@ -19,7 +19,6 @@ module Edocument
                            json: signed_credentials)
 
       raise(UnauthorizedError) unless response.code == 200
-
       response.parse
     end
   end
