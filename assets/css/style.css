@@ -1,0 +1,18 @@
+.force-wrap {
+  word-wrap:break-word;
+  width:100%;
+  display:block;
+}
+
+body{
+  background-image: url("intro-bg.jpg");
+
+    /* Full height */
+    height: 100%;
+    color: white;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
