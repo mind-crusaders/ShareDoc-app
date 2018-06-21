@@ -2,7 +2,7 @@
 
 require 'http'
 
-module Edocuments
+module Edocument
   # Returns an authenticated user, or nil
   class AuthenticateGithubAccount
     def initialize(config)
