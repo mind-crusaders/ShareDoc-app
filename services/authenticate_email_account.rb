@@ -17,7 +17,7 @@ module Edocument
 
       response = HTTP.post("#{@config.API_URL}/auth/authenticate/email_account",
                            json: signed_credentials)
-        puts(response.code)
+
       raise(UnauthorizedError) unless response.code == 200
 
       response.parse
