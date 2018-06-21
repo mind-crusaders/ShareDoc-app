@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'roda'
+require "roda"
 
 module Edocument
-  # Web controller for Edocument API
+  # Web controller for Wefix API
   class App < Roda
     route('auth') do |routing| # rubocop:disable Metrics/BlockLength
       @login_route = '/auth/login'
@@ -17,23 +17,23 @@ module Edocument
         "#{url}?client_id=#{client_id}&scope=#{scope}"
       end
 
-      routing.is 'sso_callback' do
+      routing.is "sso_callback" do
         # GET /auth/sso_callback
         routing.get do
           sso_account = AuthenticateGithubAccount
-                        .new(App.config)
-                        .call(routing.params['code'])
+            .new(App.config)
+            .call(routing.params["code"])
 
-          current_user = User.new(sso_account['account'],
-                                  sso_account['auth_token'])
+          current_user = User.new(sso_account["account"],
+                                  sso_account["auth_token"])
 
           Session.new(SecureSession.new(session)).set_user(current_user)
           flash[:notice] = "Welcome #{current_user.username}!"
-          routing.redirect '/projects'
+          routing.redirect "/documents"
         rescue StandardError => error
           puts error.inspect
           puts error.backtrace
-          flash[:error] = 'Could not sign in using Github'
+          flash[:error] = "Could not sign in using Github"
           routing.redirect @login_route
         end
       end
@@ -51,37 +51,40 @@ module Edocument
           credentials = Form::LoginCredentials.call(routing.params)
 
           if credentials.failure?
-            flash[:error] = 'Please enter both username and password'
+            flash[:error] = "Please enter both username and password"
             routing.redirect @login_route
           end
 
           authenticated = AuthenticateEmailAccount.new(App.config)
                                                   .call(credentials)
-          current_user = User.new(authenticated['account'],
-                                  authenticated['auth_token'])
+
+          current_user = User.new(authenticated["account"],
+                                  authenticated["auth_token"])
 
           Session.new(SecureSession.new(session)).set_user(current_user)
           flash[:notice] = "Welcome back #{current_user.username}!"
-          routing.redirect '/'
+          routing.redirect "/documents"
         rescue StandardError
-          flash[:error] = 'Username and password did not match our records'
+          flash[:error] = "Username and password did not match our records"
           routing.redirect @login_route
         end
       end
 
-      routing.is 'logout' do
+      routing.is "logout" do
         routing.get do
           Session.new(SecureSession.new(session)).delete
           routing.redirect @login_route
         end
       end
 
-      @register_route = '/auth/register'
-      routing.on 'register' do
+      @register_route = "/auth/register"
+      routing.on "register" do
         routing.is do
           # GET /auth/register
           routing.get do
-            view :register
+            view :register, locals: {
+                              gh_oauth_url: gh_oauth_url(App.config),
+                            }
           end
 
           # POST /auth/register
@@ -95,21 +98,21 @@ module Edocument
 
             VerifyRegistration.new(App.config).call(registration)
 
-            flash[:notice] = 'Please check your email for a verification link'
-            routing.redirect '/'
+            flash[:notice] = "Please check your email for a verification link"
+            routing.redirect @register_route
           rescue StandardError
-            flash[:error] = 'Please check username and email'
+            flash[:error] = "Please check username and email"
             routing.redirect @register_route
           end
         end
 
         # GET /auth/register/[registration_token]
         routing.get(String) do |registration_token|
-          flash.now[:notice] = 'Email Verified! Please choose a new password'
+          flash.now[:notice] = "Email Verified! Please choose a new password"
           new_account = SecureMessage.decrypt(registration_token)
           view :register_confirm,
-               locals: { new_account: new_account,
-                         registration_token: registration_token }
+               locals: {new_account: new_account,
+                        registration_token: registration_token}
         end
       end
     end
