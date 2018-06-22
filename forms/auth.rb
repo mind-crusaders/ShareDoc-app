@@ -4,8 +4,8 @@ require 'dry-validation'
 
 module Edocument
   module Form
-    #USERNAME_REGEX = /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/
-    USERNAME_REGEX = /./
+    USERNAME_REGEX = /^[a-zA-Z0-9]+([._]?[a-zA-Z0-9]+)*$/
+    #USERNAME_REGEX = /./
     EMAIL_REGEX = /@/
 
     LoginCredentials = Dry::Validation.Params do
