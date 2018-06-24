@@ -11,9 +11,9 @@ body id="page-top"
         - if @current_user.logged_in?
           li class="nav-item"
             a class="nav-link js-scroll-trigger" href="/projects" projects
-          li
-                a href='/auth/logout' logout
-                
+          li class="nav-item"
+            a class="nav-link js-scroll-trigger" href="/auth/logout" logout
+
         - else
           li class="nav-item"
             a href='/#' home
