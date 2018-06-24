@@ -14,10 +14,10 @@ body id="page-top"
           /li class="dropdown"
           /  a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
 
-              = "#{@current_account['username']}"
+              = "#{@current_user['username']}"
             ul class=-"navbar-nav ml-auto"
               li class="nav-item"
-                a href="/account/#{@current_account['username']}" account
+                a href="/account/#{@current_user['username']}" account
               li class="nav-item"
                 a href='/auth/logout' logout
         - else

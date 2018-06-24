@@ -21,7 +21,7 @@ module Edocument
 
       # GET /
       routing.root do
-        view 'home', locals: { current_account: @current_account }
+        view 'home', locals: { current_user: @current_user }
       end
     end
   end
