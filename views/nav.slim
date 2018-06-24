@@ -11,15 +11,9 @@ body id="page-top"
         - if @current_user.logged_in?
           li class="nav-item"
             a class="nav-link js-scroll-trigger" href="/projects" projects
-          /li class="dropdown"
-          /  a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"
+          li class="nav-item"
+            a class="nav-link js-scroll-trigger" href="/auth/logout" logout
 
-              = "#{@current_user['username']}"
-            ul class=-"navbar-nav ml-auto"
-              li class="nav-item"
-                a href="/account/#{@current_user['username']}" account
-              li class="nav-item"
-                a href='/auth/logout' logout
         - else
           li class="nav-item"
             a href='/#' home

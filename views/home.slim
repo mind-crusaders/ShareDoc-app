@@ -1,9 +1,12 @@
 h1 Welcome to Edocument
 p This site allows users to securely upload and store all identity related documents which can include passport, drivers licence, birth certificate, and many more.
   
-p
-  i Website still under development.
-
-- unless current_user
+- if current_user.logged_out?
   p 
     a href='/auth/login' login to start!
+    
+  p This service is completely free!
+  
+- else
+  p Welcome back!
+    
