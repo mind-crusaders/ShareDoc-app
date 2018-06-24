@@ -3934,6 +3934,11 @@ input[type="button"].btn-block {
   padding: 0.5rem 1rem;
 }
 
+.navbar-nav > li{
+  padding-left:30px;
+  padding-right:30px;
+}
+
 .navbar > .container,
 .navbar > .container-fluid {
   display: -ms-flexbox;
