@@ -3871,6 +3871,9 @@ input[type="button"].btn-block {
 
 .nav-tabs .nav-item {
   margin-bottom: -1px;
+  padding-left:30px;
+  padding-right:30px;
+  
 }
 
 .nav-tabs .nav-link {
