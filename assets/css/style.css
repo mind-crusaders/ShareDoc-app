@@ -12,6 +12,10 @@ li a {
   text-decoration: none;
 }
 
+li a:hover {
+  background-color: #a9a9a9;  
+}
+
 body{
   background-image: url("intro-bg.jpg");
 
