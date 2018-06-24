@@ -12,4 +12,4 @@ test:
 
 production:
   API_URL: https://edocuments-api.herokuapp.com/api/v1
-  APP_URL: https://edocuments-app.herokuapp.com/
+  APP_URL: https://edocuments-app.herokuapp.com
