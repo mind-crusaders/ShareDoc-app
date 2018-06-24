@@ -103,7 +103,7 @@ module Edocument
           #rescue StandardError
             #flash[:error] = "The username or email provided are not valid"
             #routing.redirect @register_route
-          #end
+          end
         end
 
         # GET /auth/register/[registration_token]
