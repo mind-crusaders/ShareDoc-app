@@ -100,9 +100,9 @@ module Edocument
 
             flash[:notice] = "Please check your email for a verification link"
             routing.redirect '/'
-          #rescue StandardError
-            #flash[:error] = "The username or email provided are not valid"
-            #routing.redirect @register_route
+          rescue StandardError
+            flash[:error] = "The username or email provided are not valid"
+            routing.redirect @register_route
           end
         end
 
