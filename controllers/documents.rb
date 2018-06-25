@@ -32,7 +32,7 @@ module Edocument
           end
           
           routing.post do
-            document = Form::NewDocument.call(routing.params)
+            document = Form::AddDocument.call(routing.params)
             if document.failure?
               flash[:error] = Form.message_values(document)
               routing.redirect "/account/#{@current_user.username}"
