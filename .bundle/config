@@ -1,2 +1,2 @@
 ---
-BUNDLE_WITHOUT: "production:production"
+BUNDLE_WITHOUT: "production"
