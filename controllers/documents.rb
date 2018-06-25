@@ -10,14 +10,8 @@ module Edocument
         routing.is do
           routing.get do
             if @current_user.logged_in?
-=begin 
-              doc_info = GetDocument.new(App.config)
-                                    .call(@current_user, doc_id)
-                
-              document = Document.new(doc_info)
-=end
               view :documents, locals: {
-                current_user: @current_user#, document: document
+                current_user: @current_user
               }
             else
               routing.redirect '/auth/login'
