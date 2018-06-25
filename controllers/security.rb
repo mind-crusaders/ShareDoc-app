@@ -12,7 +12,7 @@ module Edocument
       SecureMessage.setup(config)
     end
 
-    ONE_MONTH = 30 * 24 * 60 * 60 # in seconds
+    #ONE_MONTH = 30 * 24 * 60 * 60 # in seconds
 
     configure :development, :test do
       # use Rack::Session::Cookie,
