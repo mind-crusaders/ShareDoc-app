@@ -16,6 +16,7 @@ module Edocument
               flash[:error] = Form.message_values(document)
               routing.redirect "/account/#{@current_user.username}"
             end 
+          end 
       routing.on do
         # GET /account/[username]
         routing.get String do |username|
