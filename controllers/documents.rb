@@ -7,19 +7,21 @@ module Edocument
   class App < Roda
     route('documents') do |routing|
       routing.on do
-        
-        routing.get(String) do |doc_id| 
-          if @current_user.logged_in?
-            doc_info = GetDocument.new(App.config)
-                                  .call(@current_user, doc_id)
-              
-            document = Document.new(doc_info)
-  
-            view :documents, locals: {
-              current_user: @current_user, document: document
-            }
-          else
-            routing.redirect '/auth/login'
+        routing.is do
+          routing.get do
+            if @current_user.logged_in?
+=begin 
+              doc_info = GetDocument.new(App.config)
+                                    .call(@current_user, doc_id)
+                
+              document = Document.new(doc_info)
+=end
+              view :documents, locals: {
+                current_user: @current_user, document: document
+              }
+            else
+              routing.redirect '/auth/login'
+            end
           end
         end
       end
