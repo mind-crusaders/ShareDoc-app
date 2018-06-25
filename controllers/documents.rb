@@ -20,6 +20,17 @@ module Edocument
         end
         
         routing.on 'add' do
+          
+          routing.get do
+            if @current_user.logged_in?
+              view :document_add, locals: {
+                current_user: @current_user
+              }
+            else
+              routing.redirect '/auth/login'
+            end
+          end
+          
           routing.post do
             document = Form::NewDocument.call(routing.params)
             if profile.failure?
