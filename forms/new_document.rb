@@ -2,8 +2,6 @@
 
 require 'dry-validation'
 
-require_relative 'form_base'
-
 module Edocument
   module Form
     NewDocument = Dry::Validation.Params do
