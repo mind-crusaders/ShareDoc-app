@@ -34,7 +34,8 @@ module Edocument
           CreateAccount.new(App.config).call(
             email: new_account['email'],
             username: new_account['username'],
-            password: routing.params['password']
+            password: routing.params['password'],
+            #documents: "#{App.config.AWS_S3_URL}/#{App.config.AWS_BUCKET_NAME}/"
           )
           flash[:notice] = 'Account created! Please login'
           routing.redirect '/auth/login'

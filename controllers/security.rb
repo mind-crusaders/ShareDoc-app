@@ -60,7 +60,7 @@ module Edocument
         child_src: %w['self'],
         connect_src: %w[wws:],
         img_src: %w['self'],
-        font_src: %w['self' https://maxcdn.bootstrapcdn.com],
+        font_src: %w['self' https://maxcdn.bootstrapcdn.com https://fonts.gstatic.com],
         script_src: %w['self' https://code.jquery.com https://maxcdn.bootstrapcdn.com],
         style_src: %w['self' 'unsafe-inline' https://maxcdn.bootstrapcdn.com https://cdnjs.cloudflare.com https://fonts.googleapis.com],
         form_action: %w['self'],
