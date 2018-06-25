@@ -10,7 +10,7 @@ class AddDocument
   #  def message
    #   'This file cannot be added: please try again'
    # end
-  end
+  #end
   def initialize(config)
     @config = config
   end
