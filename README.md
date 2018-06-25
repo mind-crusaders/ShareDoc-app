@@ -7,6 +7,7 @@ The following was intended as our project:
 - Set up App
 - Set up API
 - Set up Views
+- Set up Heroku 
 - Set up Login 
 - Set up Register
 - Set up Oauth
