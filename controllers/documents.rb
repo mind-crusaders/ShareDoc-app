@@ -15,7 +15,7 @@ module Edocument
               
             document = Document.new(doc_info)
   
-            view :document, locals: {
+            view :documents, locals: {
               current_user: @current_user, document: document
             }
           else
