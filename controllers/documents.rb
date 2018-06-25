@@ -6,7 +6,7 @@ module Edocument
   # Web controller for Edocument API
   class App < Roda
     route('documents') do |routing|
-      routing.on 'documents' do
+      routing.on do
         routing.is do
           routing.get do
             if @current_user.logged_in?
