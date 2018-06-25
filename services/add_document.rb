@@ -24,7 +24,7 @@ class AddDocument
       region: @config.AWS_REGION
     )
 
-    object_key = "#{@config.AWS_PROFILE_FOLDER_NAME}/#{user.username}.png"
+    object_key = "#{@config.AWS_BUCKET_NAME}/#{user.username}"
     result = s3.put_object(bucket: @config.AWS_BUCKET_NAME, key: object_key, body: file)
 
     # Setting the object to public-read
