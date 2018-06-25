@@ -18,6 +18,19 @@ module Edocument
             end
           end
         end
+
+        routing.is 'add' do
+          routing.get do
+            if @current_user.logged_in?
+              view :document_add, locals: {
+                current_user: @current_user
+              }
+            else
+              routing.redirect '/auth/login'
+            end
+          end
+        end
+
       end
     end
   end
