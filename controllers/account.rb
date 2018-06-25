@@ -8,15 +8,6 @@ module Edocument
     # rubocop:disable Metrics/BlockLength
     route('account') do |routing|
        # POST /account/document/add
-      routing.on 'document' do
-        routing.on 'New_document' do
-          routing.post do
-            document = Form::Document_add.call(routing.params)
-            if profile.failure?
-              flash[:error] = Form.message_values(document)
-              routing.redirect "/account/#{@current_user.username}"
-            end 
-          end 
       routing.on do
         # GET /account/[username]
         routing.get String do |username|
@@ -57,5 +48,6 @@ module Edocument
           )
         end
       end
+    end
   end
 end
