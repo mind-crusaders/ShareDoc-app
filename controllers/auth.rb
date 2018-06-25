@@ -99,7 +99,7 @@ module Edocument
             VerifyRegistration.new(App.config).call(registration)
 
             flash[:notice] = "Please check your email for a verification link"
-            routing.redirect @register_route
+            routing.redirect '/'
           rescue StandardError
             flash[:error] = "The username or email provided are not valid"
             routing.redirect @register_route

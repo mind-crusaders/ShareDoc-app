@@ -8,6 +8,9 @@ gem 'puma'
 gem 'roda'
 gem 'slim'
 
+#Amazon aws
+gem 'aws-sdk'#, '~> 2' 
+
 # Configuration
 gem 'econfig'
 gem 'rake'

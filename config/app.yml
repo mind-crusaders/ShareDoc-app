@@ -13,3 +13,4 @@ test:
 production:
   API_URL: https://edocuments-api.herokuapp.com/api/v1
   APP_URL: https://edocuments-app.herokuapp.com
+  REDIS_URL: redis://h:p00005dee83135381aad3115361d5debec2cb8c6cb283952099831d93e1e4ecf0@ec2-54-174-89-111.compute-1.amazonaws.com:7969

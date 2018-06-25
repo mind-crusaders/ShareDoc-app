@@ -7,6 +7,7 @@ module Edocument
   class App < Roda
     # rubocop:disable Metrics/BlockLength
     route('account') do |routing|
+       # POST /account/document/add
       routing.on do
         # GET /account/[username]
         routing.get String do |username|
@@ -48,6 +49,5 @@ module Edocument
         end
       end
     end
-    # rubocop:enable Metrics/BlockLength
   end
 end
