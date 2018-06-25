@@ -17,7 +17,7 @@ module Edocument
               document = Document.new(doc_info)
 =end
               view :documents, locals: {
-                current_user: @current_user, document: document
+                current_user: @current_user#, document: document
               }
             else
               routing.redirect '/auth/login'
